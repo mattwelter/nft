@@ -206,6 +206,10 @@
             background: rgba(0, 0, 0, .75) url(img/spinner.svg) no-repeat center center; 
             z-index: 10000
         }
+
+      .active {
+        back
+      }
       
       @-webkit-keyframes fadeIn {
         from {
@@ -260,6 +264,7 @@
       </div>
       <div class="splitView__view splitView__view--content">
         <h1 class="logo">Embed your NFTs on any website!</h1>
+        <h4 class="text-secondary">A simple iframe that displays your NFTs in a gallery</h4>
         <img id="logos" src="images/logos2.png">
         <h6 class="text-black-50 mt-3 text-sm-left"><span class="badge badge-secondary">1</span> Filter by most recent/most valuable or hand pick your own NFTs to showcase</h6>
         <h6 class="text-black-50 mt-3 text-left"><span class="badge badge-secondary">2</span> Choose between 7 different gallery styles</h6>
@@ -271,10 +276,16 @@
             <input type="email" name="What's your email?" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
-          <button type="submit" name="submit" class="btn btn-primary">Join waitlist</button>
+          <button type="submit" name="submit" class="btn btn-primary" id="button">Join waitlist</button>
         </form>
       </div>
     </div>
+    <script type="text/javascript">
+      $(document).on('click', 'button', function(){
+        $(this).addClass('bg-success');
+        document.querySelector('#button').textContent = 'Submitted!';
+      })
+    </script>
     <script>
                 const scriptURL = 'https://script.google.com/macros/s/AKfycbwbzTUxWkuENJpYz-0QINb9wsW6K0oroSsAAjCqnq8AW-TgaM-Tzgrrap0U3F39w7IXpw/exec'
                 const form = document.forms['google-sheet']
@@ -282,7 +293,7 @@
                 form.addEventListener('submit', e => {
                   e.preventDefault()
                   fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                    .then(response => alert("Thanks for Contacting us..! We Will Contact You Soon..."))
+                    .then(response => alert("You're added to the waitlist!"))
                     .catch(error => console.error('Error!', error.message))
                 })
     </script>
