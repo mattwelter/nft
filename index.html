@@ -9,13 +9,16 @@
     <meta property="og:image" content="images/thumbnail.png" />
     <meta name="description" content="Embed your owned NFTs on Notion, !">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <style>
       html, body {
         height: 100%; }
       
       body {
         background-color: #fff;
-        font-family: Arial, san-serif, serif;
         color: #120121;
         padding: 0;
         margin: 0; }
@@ -49,7 +52,7 @@
           text-decoration: underline; }
       
       h1.logo {
-        text-transform: uppercase; }
+         }
         h1.logo:before {
           content: "";
           display: block;
@@ -81,7 +84,6 @@
 
       #logos {
         width: 400px;
-        margin-top: -50px;
       }
       
       .splitView__view--wallpaper {
@@ -108,13 +110,8 @@
           text-align: left;
           line-height: 1.5;
           margin-top: 0; }
-        .splitView__view--content h3 {
-          text-align: left;
-          font-size: 14px;
-          text-transform: uppercase;
-          margin-top: 2em;
-          margin-bottom: 0.5em;
-          letter-spacing: 0.05em; }
+
+
       
       .screenshot {
         position: absolute;
@@ -197,6 +194,18 @@
           display: block;
           height: 100%;
           width: 100%; }
+
+      #loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, .75) url(img/spinner.svg) no-repeat center center; 
+            z-index: 10000
+        }
       
       @-webkit-keyframes fadeIn {
         from {
@@ -250,17 +259,32 @@
         </div>
       </div>
       <div class="splitView__view splitView__view--content">
-        <h1 class="logo">Embedded NFT Gallery</h1>
-        <h2>Embed your owned NFTs on any website!</h2>
+        <h1 class="logo">Embed your NFTs on any website!</h1>
         <img id="logos" src="images/logos2.png">
-        <h3>1. You choose what shows up in your gallery!</h3>
-        <p>Filter by most recent, handpicked, or most valuable!</p>
-        <h3>2. 28 unique gallery styles!</h3>
-        <p>Choose between 7 colors & 4 different gallery styles!</p>
-        <h3>3. It's free!.. for now</h3>
-        <p>First 100 users get it for free, $7 a month after</p>
-        <a class="button" data-behavior="safari-only" target="_blank" href="https://docs.google.com/forms/d/14jAwRA-0ssCgWCn_ye_573WGOGaEdwI8Z0LqkxVZ30g/" style="">Join waitlist</a>
+        <h6 class="text-black-50 mt-3 text-sm-left"><span class="badge badge-secondary">1</span> Filter by most recent/most valuable or hand pick your own NFTs to showcase</h6>
+        <h6 class="text-black-50 mt-3 text-left"><span class="badge badge-secondary">2</span> Choose between 7 different gallery styles</h6>
+        <h6 class="text-black-50 mt-3 text-left"><span class="badge badge-secondary">3</span> The first 100 users get it free, $7 a month after</h6>
+
+        <form name="google-sheet" method="post" style="margin-top: 50px;">
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="lead">Be 1 of 100 users to get it free</label>
+            <input type="email" name="What's your email?" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <button type="submit" name="submit" class="btn btn-primary">Join waitlist</button>
+        </form>
       </div>
     </div>
+    <script>
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbwbzTUxWkuENJpYz-0QINb9wsW6K0oroSsAAjCqnq8AW-TgaM-Tzgrrap0U3F39w7IXpw/exec'
+                const form = document.forms['google-sheet']
+              
+                form.addEventListener('submit', e => {
+                  e.preventDefault()
+                  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                    .then(response => alert("Thanks for Contacting us..! We Will Contact You Soon..."))
+                    .catch(error => console.error('Error!', error.message))
+                })
+    </script>
   </body>
 </html>
